@@ -13,7 +13,7 @@
     <!-- CSFR token for ajax call -->
     <meta name="_token" content="{{ csrf_token() }}"/>
 
-    <title>Modulo de paises</title>
+    <title>Modulo de provincias</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -68,22 +68,25 @@
 
 <body>
     <div class="col-md-8 col-md-offset-2">
-        <h2 class="text-center">Modulo de paises</h2>
+        <h2 class="text-center">Modulo de provincias</h2>
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
                 <ul>
-                    <li><i class="fa fa-file-text-o"></i> Paises</li>
+                    <li><i class="fa fa-file-text-o"></i> Provincias</li>
                     <li> <a href="#" class="add-modal btn btn-primary ">  <span class="   glyphicon glyphicon-floppy-saved">Agregar</span></a></li>
                 </ul>
             </div>
 
             <div class="panel-body">
+
+           
                     <table class="table table-striped table-bordered table-hover" id="postTable" style="visibility: hidden;">
                         <thead>
                             <tr>
                                 <th valign="middle">ID</th>
-                                <th>Codigo pais</th>
+                                <th>Codigo provincia</th>
+                                <th>Nombre provincia</th>
                                 <th>Nombre pais</th>
                                 <th>Ultima Modificación</th>
                                 <th>Operaciones</th>
@@ -94,15 +97,16 @@
                             @foreach($posts as $post)
                                 <tr class="item{{$post->id}}">
                                     <td>{{$post->id}}</td>
-                                    <td>{{$post->CodigoPais}}</td>
+                                    <td>{{$post->CodigoProvincias}}</td>
+                                   <td>{{$post->NombreProvincias}}</td>
                                     <td>{{$post->NombrePais}}</td>
                                     <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->updated_at)->diffForHumans() }}</td>
                                     <td>
-                                        <button class="show-modal btn btn-success" data-id="{{$post->id}}" data-codigopais="{{$post->CodigoPais}}" data-nombrepais="{{$post->NombrePais}}">
+                                        <button class="show-modal btn btn-success" data-id="{{$post->id}}" data-codigoprovincias="{{$post->CodigoProvincias}}" data-nombreprovincias="{{$post->NombreProvincias}}" data-nombrepais="{{$post->NombrePais}}">
                                         <span class="glyphicon glyphicon-eye-open"></span> Mostrar</button>
-                                        <button class="edit-modal btn btn-info" data-id="{{$post->id}}" data-codigopais="{{$post->CodigoPais}}" data-nombrepais="{{$post->NombrePais}}">
+                                        <button class="edit-modal btn btn-info" data-id="{{$post->id}}" data-codigoprovincias="{{$post->CodigoProvincias}}" data-nombreprovincias="{{$post->NombreProvincias}}" data-nombrepais="{{$post->NombrePais}}"  data-idpais="{{$post->idpais}}">
                                         <span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                        <button class="delete-modal btn btn-danger" data-id="{{$post->id}}" data-codigopais="{{$post->CodigoPais}}" data-nombrepais="{{$post->NombrePais}}">
+                                        <button class="delete-modal btn btn-danger" data-id="{{$post->id}}" data-codigoprovincias="{{$post->CodigoProvincias}}" data-nombreprovincias="{{$post->NombreProvincias}}" data-nombrepais="{{$post->NombrePais}}">
                                         <span class="glyphicon glyphicon-trash"></span> Eliminar</button>
                                     </td>
                                 </tr>
@@ -123,17 +127,28 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="codigo">Codigo Pais:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="codigopais_add" autofocus>
-                                <p class="errorCodigo text-center alert alert-danger hidden"></p>
+                       <div class="form-group">
+                            <label class="control-label col-sm-2" for="pais">Pais que pertenece:</label>
+                                                        <div class="col-sm-10">
+                            <select id="nombrepais_add" class="form-control">
+                                  @foreach($paises as $pai)
+                                    <option value="{{$pai->id}}">{{$pai->NombrePais}}</option>
+                                  @endforeach
+                            </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="content">Nombre Pais:</label>
+                            <label class="control-label col-sm-2" for="codigo">Codigo Provincia:</label>
                             <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="nombrepais_add" autofocus>
+                                <input type="text" class="form-control" id="codigoprovincias_add" autofocus>
+                                <p class="errorCodigo text-center alert alert-danger hidden"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="content">Nombre Provincia:</label>
+                            <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="nombreprovincias_add" autofocus>
                                 <p class="errorNombre text-center alert alert-danger hidden"></p>
                             </div>
                         </div>
@@ -168,13 +183,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="title">Codigo Pais:</label>
+                            <label class="control-label col-sm-2" for="title">Codigo Provincia:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="codigopais_show" disabled>
+                                <input type="name" class="form-control" id="codigoprovincia_show" disabled>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="content">Nombre Pais:</label>
+                            <label class="control-label col-sm-2" for="content">Nombre Provincia :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control" id="nombreprovincia_show" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="content">Nombre Pais :</label>
                             <div class="col-sm-10">
                                 <input type="name" class="form-control" id="nombrepais_show" disabled>
                             </div>
@@ -200,23 +221,35 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
+                    <div class="form-group">
                             <label class="control-label col-sm-2" for="id">ID:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="id_edit" disabled>
                             </div>
                         </div>
+                    <div class="form-group">
+                            <label class="control-label col-sm-2" for="pais">Pais que pertenece:</label>
+                                                        <div class="col-sm-10">
+                            <select id="nombrepais_edit" class="form-control">
+                                  @foreach($paises as $pai)
+                                    <option value="{{$pai->id}}">{{$pai->NombrePais}}</option>
+                                  @endforeach
+                            </select>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="title">Codigo Pais:</label>
+                            <label class="control-label col-sm-2" for="title">Codigo provincia:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="codigopais_edit" autofocus>
+                                <input type="text" class="form-control" id="codigoprovincias_edit" autofocus>
                                 <p class="errorCodigo text-center alert alert-danger hidden"></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="content">Nombre Pais:</label>
+                            <label class="control-label col-sm-2" for="content">Nombre Provincias:</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="nombrepais_edit" autofocus>
+                                 <input type="text" class="form-control" id="nombreprovincias_edit">
+
                                 <p class="errorNombre text-center alert alert-danger hidden"></p>
                             </div>
                         </div>
@@ -253,9 +286,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="title">Pais:</label>
+                            <label class="control-label col-sm-2" for="title">Provincia:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="nombrepais_delete" disabled>
+                                <input type="name" class="form-control" id="nombreprovincias_delete" disabled>
                             </div>
                         </div>
                     </form>
@@ -290,23 +323,22 @@
         })
     </script>
 
-    
-
-    <!-- AJAX CRUD operations -->
+      <!-- AJAX CRUD operations -->
     <script type="text/javascript">
         // add a new post
         $(document).on('click', '.add-modal', function() {
-            $('.modal-title').text('Añadir un nuevo pais');
+            $('.modal-title').text('Añadir una nueva provincia');
             $('#addModal').modal('show');
         });
         $('.modal-footer').on('click', '.add', function() {
             $.ajax({
                 type: 'POST',
-                url: 'pais',
+                url: 'provincias',
                 data: {
                     '_token': $('input[name=_token]').val(),
-                    'codigopais': $('#codigopais_add').val(),
-                    'nombrepais': $('#nombrepais_add').val()
+                    'idpais': $('#nombrepais_add').val(),
+                    'nombreprovincias': $('#nombreprovincias_add').val(),
+                    'codigoprovincias': $('#codigoprovincias_add').val()
                 },
                 success: function(data) {
                     $('.errorCodigo').addClass('hidden');
@@ -327,8 +359,8 @@
                             $('.errorNombre').text(data.errors.nombrepais);
                         }
                     } else {
-                        toastr.success('Añadido Con exito!', 'Success Alert', {timeOut: 5000});
-                             location.reload();
+        toastr.success('Añadido Con exito!', 'Success Alert', {timeOut: 5000});
+        location.reload();
                     }
                 },
             });
@@ -336,9 +368,10 @@
 
         // Show a post
         $(document).on('click', '.show-modal', function() {
-            $('.modal-title').text('Mostrar Pais');
+            $('.modal-title').text('Mostrar Provincias');
             $('#id_show').val($(this).data('id'));
-            $('#codigopais_show').val($(this).data('codigopais'));
+            $('#codigoprovincia_show').val($(this).data('codigoprovincias'));
+            $('#nombreprovincia_show').val($(this).data('nombreprovincias'));
             $('#nombrepais_show').val($(this).data('nombrepais'));
             $('#showModal').modal('show');
         });
@@ -346,22 +379,24 @@
 
         // Edit a post
         $(document).on('click', '.edit-modal', function() {
-            $('.modal-title').text('Editar Pais');
+            $('.modal-title').text('Editar Provincias');
             $('#id_edit').val($(this).data('id'));
-            $('#codigopais_edit').val($(this).data('codigopais'));
-            $('#nombrepais_edit').val($(this).data('nombrepais'));
+            $('#codigoprovincias_edit').val($(this).data('codigoprovincias'));
+            $('#nombreprovincias_edit').val($(this).data('nombreprovincias'));
+            $('#nombrepais_edit').val($(this).data('idpais'));
             id = $('#id_edit').val();
             $('#editModal').modal('show');
         });
         $('.modal-footer').on('click', '.edit', function() {
             $.ajax({
                 type: 'PUT',
-                url: 'pais/' + id,
+                url: 'provincias/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'id': $("#id_edit").val(),
-                    'codigopais': $('#codigopais_edit').val(),
-                    'nombrepais': $('#nombrepais_edit').val()
+                    'idpais': $('#nombrepais_edit').val(),
+                    'codigoprovincias': $('#codigoprovincias_edit').val(),
+                    'nombreprovincias': $('#nombreprovincias_edit').val()
                 },
                 success: function(data) {
                     $('.errorCodigo').addClass('hidden');
@@ -382,8 +417,8 @@
                             $('.errorNombre').text(data.errors.nombrepais);
                         }
                     } else {
-                        toastr.success('Actualizado con exito!', 'Success Alert', {timeOut: 5000});
-                        location.reload();
+                        toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
+                       location.reload();
                     }
                 }
             });
@@ -391,16 +426,16 @@
 
         // delete a post
         $(document).on('click', '.delete-modal', function() {
-            $('.modal-title').text('Eliminar Pais');
+            $('.modal-title').text('Eliminar Provincias');
             $('#id_delete').val($(this).data('id'));
-            $('#nombrepais_delete').val($(this).data('nombrepais'));
+            $('#nombreprovincias_delete').val($(this).data('nombreprovincias'));
             $('#deleteModal').modal('show');
             id = $('#id_delete').val();
         });
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'pais/' + id,
+                url: 'provincias/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },
