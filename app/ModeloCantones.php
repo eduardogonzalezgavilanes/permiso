@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModeloProvincias extends Model
+class ModeloCantones extends Model
 {
-    protected $table = 'Provincias';
-    protected $fillable = ['CodigoProvincia', 'idpais','NombreProvincia'];
+    protected $table = 'Cantones';
+    protected $fillable = ['CodigoCantones', 'idprovincias','NombreCantones'];
 
     public static function getExcerpt($str, $startPos = 0, $maxLength = 50) {
         if(strlen($str) > $maxLength) {
@@ -20,6 +20,4 @@ class ModeloProvincias extends Model
         }
 
         return $excerpt;
-    }
-
-}
+    }}
