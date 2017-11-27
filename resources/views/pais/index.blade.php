@@ -69,7 +69,6 @@
 </head>
 
 <body>
-    <div class="col-md-8 col-md-offset-2">
         <h2 class="text-center">Modulo de paises</h2>
         <br />
         <div class="panel panel-default">
@@ -113,7 +112,6 @@
                     </table>
             </div><!-- /.panel-body -->
         </div><!-- /.panel panel-default -->
-    </div><!-- /.col-md-8 -->
 
     <!-- Modal form to add a post -->
     <div id="addModal" class="modal fade" role="dialog">

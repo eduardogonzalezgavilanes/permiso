@@ -22,7 +22,7 @@ protected $rules =
 
     public function index()
     {
-        $posts = DB::statement('CALL mostrarcantones');
+         $posts = DB::table('vCantones')->get();
         $provincias = ModeloProvincias::all();
         return view('cantones.index', ['posts' => $posts],['provincias'=>$provincias]);
     }
@@ -36,7 +36,7 @@ protected $rules =
             $post = new ModeloCantones();
             $post->CodigoCantones= $request->codigocantones;
             $post->NombreCantones = $request->nombrecantones;
-          	$post->idprovincias=$request->idprovincias;
+            $post->idprovincias=$request->idprovincias;
             $post->save();
             return response()->json($post);
         }

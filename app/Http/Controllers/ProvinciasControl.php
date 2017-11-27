@@ -22,7 +22,7 @@ protected $rules =
 
     public function index()
     {
-        $posts = DB::statement('CALL mostrarprovincias');
+        $posts = DB::table('vProvincias')->get();
         $paises = ModeloPais::all();
         return view('provincias.index', ['posts' => $posts],['paises'=>$paises]);
     }
@@ -36,7 +36,7 @@ protected $rules =
             $post = new ModeloProvincias();
             $post->CodigoProvincias = $request->codigoprovincias;
             $post->NombreProvincias = $request->nombreprovincias;
-          	$post->idpais=$request->idpais;
+            $post->idpais=$request->idpais;
             $post->save();
             return response()->json($post);
         }
@@ -57,7 +57,7 @@ protected $rules =
             $post = ModeloProvincias::findOrFail($id);
             $post->CodigoProvincias = $request->codigoprovincias;
             $post->NombreProvincias = $request->nombreprovincias;
-          	$post->idpais=$request->idpais;
+            $post->idpais=$request->idpais;
             $post->save();
 
             return response()->json($post);
