@@ -13,7 +13,7 @@ class AuthController extends Controller
 
 protected function getLogout()
     {
-    DB::select('CALL actualizarestados(?)',array(Auth::user()->id));
+    DB::statement('CALL actualizarestados(?)',array(Auth::user()->id));
 	Auth::logout();
 	Session::flush();
     return redirect('login');

@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
        
             if (Auth::user()->estado == 0){
-                DB::select('CALL actualizarestados(?)',array(Auth::user()->id));
+                DB::statement('CALL actualizarestados(?)',array(Auth::user()->id));
                 define('BOT_TOKEN','418313703:AAFNbJi6Bktm_hzx0BBombgauKckLvdVQYU');
                 define('CHAT_ID','448027369');
                 define('API_URL','https://api.telegram.org/bot'.BOT_TOKEN.'/');

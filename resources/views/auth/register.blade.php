@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -43,7 +43,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales">
+                                <input id="password" type="password" class="form-control" name="password" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales" placeholder="Contraseña">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

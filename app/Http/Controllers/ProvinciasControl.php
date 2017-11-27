@@ -22,7 +22,7 @@ protected $rules =
 
     public function index()
     {
-        $posts = DB::select('CALL mostrarprovincias');
+        $posts = DB::statement('CALL mostrarprovincias');
         $paises = ModeloPais::all();
         return view('provincias.index', ['posts' => $posts],['paises'=>$paises]);
     }

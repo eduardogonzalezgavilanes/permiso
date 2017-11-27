@@ -163,7 +163,7 @@ src:url(fonts/OleoScript-Regular.ttf);
                     <label class="col-xs-12" for="contraseña"><h4>Contraseña:</h4></label>
                  <div class="col-xs-10 col-xs-offset-1">
                         
-                    <input id="password" type="password" class="form-control" name="password" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales">
+                    <input id="password" type="password" class="form-control Input" name="password" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales" placeholder="Contraseña">
 
                              @if ($errors->has('password'))
                                     <span class="help-block">
@@ -179,7 +179,7 @@ src:url(fonts/OleoScript-Regular.ttf);
                     <label class="col-xs-12" for="contraseña"><h4>Confirmar Contraseña:</h4></label>
                  <div class="col-xs-10 col-xs-offset-1">
                         
-                    <input id="password-confirm" type="password" class="form-control" name="password-confirm" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales">
+                    <input id="password-confirm" type="password" class="form-control Input" name="password-confirm" required pattern="^(?=(?:.*\d){2})(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})\S{8,}$" title="La contraseña debe tener al menos 2 mayusculas, 2 minusculas, 2 numeros y 2 caracteres especiales" placeholder="Repita Contraseña">
 
                            @if ($errors->has('password_confirmation'))
                                     <span class="help-block">

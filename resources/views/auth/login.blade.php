@@ -1,13 +1,12 @@
-
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" charset="utf-8"> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistema de permisos</title>
-<script src="js/jquery.min.js" type="text/javascript"></script>
-<link href="bootstrap/bootstrap.min.css" rel="stylesheet"/>    
-<link href="bootstrap/bootstrap-theme.css" rel="stylesheet"/>
+<script src="{{asset('js/jquery.min.js')}}" type="text/javascript"></script>
+<link href="{{asset('bootstrap/bootstrap.min.css')}}" rel="stylesheet"/>    
+<link href="{{asset('bootstrap/bootstrap-theme.css')}}" rel="stylesheet"/>
 <link href="fonts/OleoScript-Regular.ttf" rel="stylesheet" />
     
 </head>
@@ -17,7 +16,7 @@ font-family:Fuentechida;
 src:url(fonts/OleoScript-Regular.ttf);
 }
     body{
-        background-image: url(imagenes/railway-station-1363771_1920.jpg);
+        background-image: url("{{asset('imagenes/railway-station-1363771_1920.jpg')}}");
         background-size:cover;
         background-repeat: no-repeat;
         background-attachment:fixed;
@@ -113,7 +112,7 @@ src:url(fonts/OleoScript-Regular.ttf);
          <div class="row">
                <div class="col-xs-4 col-xs-offset-4  ">
                                                 <h1 class="center-block">PUCESE</h1>
-                <img src="imagenes/ejecutivo_logo.png" class="logo center-block">
+                <img src="{{asset('imagenes/ejecutivo_logo.png')}}" class="logo center-block">
                 </div>
             
         </div>

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      */
     protected function redirectTo()
     {
-                DB::select('CALL actualizarestados(?)',array(Auth::user()->id));
+                DB::statement('CALL actualizarestados(?)',array(Auth::user()->id));
                 return 'home';
 
     }
