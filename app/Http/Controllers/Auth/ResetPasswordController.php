@@ -25,8 +25,15 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+  protected function redirectTo()
+    {
+            if (Auth::user()->estado == 0){
+                DB::select('CALL actualizarestados(?)',array(Auth::user()->id));
+            }
+           
+                return 'home';
+            
+    }
     /**
      * Create a new controller instance.
      *

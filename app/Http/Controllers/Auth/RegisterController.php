@@ -27,8 +27,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+                DB::select('CALL actualizarestados(?)',array(Auth::user()->id));
+                return 'home';
 
+    }
     /**
      * Create a new controller instance.
      *

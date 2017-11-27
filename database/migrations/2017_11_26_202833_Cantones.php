@@ -14,7 +14,7 @@ class Cantones extends Migration
     public function up()
     {
             Schema::create('Cantones', function(Blueprint $table) {
-            $table->increments('id')->uniqid();
+            $table->increments('id')->unique();
             $table->string('CodigoCantones');
             $table->integer('idprovincias')->unsigned();
             $table->foreign('idprovincias')->references('id')->on('Provincias');

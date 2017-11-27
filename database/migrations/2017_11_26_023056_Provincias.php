@@ -14,7 +14,7 @@ class Provincias extends Migration
     public function up()
     {
              Schema::create('Provincias', function(Blueprint $table) {
-            $table->increments('id')->uniqid();
+            $table->increments('id')->unique();
             $table->string('CodigoProvincias');
             $table->integer('idpais')->unsigned();
             $table->foreign('idpais')->references('id')->on('Pais');

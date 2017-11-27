@@ -14,7 +14,7 @@ class Pais extends Migration
     public function up()
     {
             Schema::create('Pais', function(Blueprint $table) {
-            $table->increments('id')->uniqid();
+            $table->increments('id')->unique();
             $table->string('CodigoPais');
             $table->string('NombrePais');
             $table->timestamps();
